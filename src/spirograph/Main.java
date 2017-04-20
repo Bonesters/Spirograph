@@ -5,9 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public Ellipse2D outerCircle,innerCircle;
-
-//global variables
+//Global Variables
+public Ellipse2D outerCircle,Gear;//height,width,x,y
 
 
 
@@ -27,13 +26,24 @@ public class Main
     public void paint(Graphics g)
     {
       Graphics2D g2d=(Graphics2D)g;
-      
+
     }
   }
 
-private point2d getLocation()
-{
-	
-}
+//returns the location of the pen in the greater circle
+	private Point2D getLocation(double t1,double t2,float pensliderWIP)
+	{
+		Point2D pp;  //pen position
+
+		//calculation of the point in 2d land
+		pp.x = // cx + r cos(a)
+		 /*calculate outercircle pos*/ ((outercircle.radius-Gear.radius)*Math.cos(t1)+outercircle.x)
+		 /*calculate pen pos*/ + pensliderWIP * Math.cos(t2);
+		pp.y = // cy + r sin (a)
+		/*calculate outercircle pos*/ ((outercircle.radius-Gear.radius)*Math.sin(t1)+outercircle.x)
+		 /*calculate pen pos*/ + pensliderWIP * Math.sin(t2);
+
+		return pp;
+	}
 
 }
