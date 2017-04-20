@@ -1,6 +1,6 @@
 CCFLAGS = javac
 
-SourceFiles = Main.java 
+SourceFiles = /src/spirograph/Main.java 
 
 LinkerFlags = -d/bin/spirograph
 
