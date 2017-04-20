@@ -1,0 +1,15 @@
+outer fixed circle of a diameter set at start
+
+an inner circle of a diameter set at startup
+
+poke holes in inner circle
+choose colors for each hole
+possible for color gradients, going back and forth again and again
+
+some interactive element (button down to start, button up to stop)
+
+possible to have inner gear transparent 
+
+start with just circles, if that is too trivial, then we add non-circles
+
+export image
