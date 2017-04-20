@@ -1,8 +1,11 @@
 package spirograph;
 
-import java.awt.geom.Ellipse2D;
+import java.awt.geom.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+
+public Ellipse2D outerCircle,innerCircle;
 
 public class Main
 {
@@ -12,6 +15,7 @@ public class Main
     //System.out.println("HELLOR WORLD");
     JFrame f=new JFrame("Spirograph");
     DrawPanel d=new DrawPanel();
+    f.add(d);
 	}
 
   static class DrawPanel extends JPanel
@@ -19,6 +23,7 @@ public class Main
     public void paint(Graphics g)
     {
       Graphics2D g2d=(Graphics2D)g;
+      
     }
   }
 }
