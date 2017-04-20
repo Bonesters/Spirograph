@@ -4,6 +4,10 @@ import java.awt.geom.Ellipse2D;
 import javax.swing.*;
 import java.awt.*;
 
+//global variables
+
+
+
 public class Main
 {
 
@@ -21,4 +25,10 @@ public class Main
       Graphics2D g2d=(Graphics2D)g;
     }
   }
+
+private point2d getLocation()
+{
+	
+}
+
 }
