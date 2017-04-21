@@ -5,25 +5,41 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public Ellipse2D outerCircle,innerCircle;
-
 public class Main
 {
+  
+    public Circle outerCircle,innerCircle;
+    public Point2D penLoc;  //relative to origin of the circle
 
-	public static void main(String[] args)
-	{
-    //System.out.println("HELLOR WORLD");
-    JFrame f=new JFrame("Spirograph");
-    DrawPanel d=new DrawPanel();
-    f.add(d);
-	}
-
-  static class DrawPanel extends JPanel
-  {
-    public void paint(Graphics g)
+    public Main()
     {
-      Graphics2D g2d=(Graphics2D)g;
-      
+        JFrame f=new JFrame("Spirograph");
+        JPanel p=new JPanel(new GridLayout(1,2));
+        JPanel p1=new JPanel(new GridLayout(3,1));
+        DrawPanel d=new DrawPanel();
+        
+        
+        
+        p.add(d);
+        p.add(p1);
+        f.add(p);
     }
-  }
+
+    
+
+    public static void main(String[] args)
+    {
+        //System.out.println("HELLOR WORLD");
+        Main m=new Main();
+    }
+
+    class DrawPanel extends JPanel
+    {
+        public void paint(Graphics g)
+        {
+            Graphics2D g2d=(Graphics2D)g;
+            g2d.draw(outerCircle);
+            g2d.draw(innerCircle);
+        }
+    }
 }
