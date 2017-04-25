@@ -97,6 +97,14 @@ public class Circle extends Ellipse2D.Double
         return points.contains(new Point2D.Double(x,y));
     }
     
+    public Point2D.Double getPoint()
+    {
+        if(points.size()>0)
+            return points.get(0);
+        else
+            return null;
+    }
+    
     private void move(double x,double y,double radius)
     {
         super.setFrame(x-radius,y-radius,radius*2f,radius*2f);

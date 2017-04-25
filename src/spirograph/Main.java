@@ -45,23 +45,23 @@ public class Main
 	private Point2D getLocation(double t1,double t2,float pensliderWIP)
 	{
 
-        Point2D pp=new Point2D.Double(0.0,0.0);  //pen position
-
+        //Point2D pp=new Point2D.Double(0.0,0.0);  //pen position
+        Point2D pp=innerCircle.getPoint();         //pen position
         
         //calculation of the point in 2d land
-        pp.x = // cx + r cos(a)
+        double ppx = // cx + r cos(a)
         //calculate outercircle pos
         ((outerCircle.getRadius()-innerCircle.getRadius())*Math.cos(t1)+outerCircle.getX())
         //calculate pen pos
         + pensliderWIP * Math.cos(t2);
-        pp.y = // cy + r sin (a)
+        double ppy = // cy + r sin (a)
         //calculate outercircle pos
         ((outerCircle.getRadius()-innerCircle.getRadius())*Math.sin(t1)+outerCircle.getX())
         //calculate pen pos
         + pensliderWIP * Math.sin(t2);
         
 
-        return pp;
+        return new Point2D.Double(ppx,ppy);
 	}
 
 
