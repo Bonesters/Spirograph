@@ -47,7 +47,7 @@ public class Main
 
         Point2D pp=new Point2D.Double(0.0,0.0);  //pen position
 
-        /*
+        
         //calculation of the point in 2d land
         pp.x = // cx + r cos(a)
         //calculate outercircle pos
@@ -59,7 +59,7 @@ public class Main
         ((outerCircle.getRadius()-innerCircle.getRadius())*Math.sin(t1)+outerCircle.getX())
         //calculate pen pos
         + pensliderWIP * Math.sin(t2);
-        */
+        
 
         return pp;
 	}
