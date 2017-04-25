@@ -16,9 +16,9 @@ public class Main
     public JSlider slide;
     public Timer tm;
 
-    private Dimension mainSize=new Dimension(500,600);
-    private Dimension botSize=new Dimension(500,100);
-    private Dimension sliderSize=new Dimension(300,100);
+    private Dimension mainSize=new Dimension(501,601);
+    private Dimension botSize=new Dimension(501,100);
+    private Dimension sliderSize=new Dimension(301,100);
     private Dimension miscSize=new Dimension(100,100);
     private Dimension botLeftSize=new Dimension(200,100);
     private Dimension mainDrawSize=new Dimension(500,500);
@@ -26,10 +26,7 @@ public class Main
 	public Main()
     {
         outerCircle=new Circle(250,250,250);
-        innerCircle=new Circle(250,0,50);
-
-        JFrame f=new JFrame("Spirograph");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        innerCircle=new Circle(250,50,50);
 
         f=new JFrame("Spirograph");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -151,10 +148,12 @@ public class Main
             g2d.setColor(Color.BLACK);
             if(outerCircle!=null)
             {
+                //System.out.println(outerCircle.getBounds().toString());
                 g2d.draw(outerCircle);
             }
             if(innerCircle!=null)
             {
+                //System.out.println(innerCircle.getBounds().toString());
                 g2d.draw(innerCircle);
             }
         }
