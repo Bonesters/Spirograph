@@ -125,12 +125,12 @@ public class Main
 
         return new Point2D.Double(ppx,ppy);
 	}
-	
+
 	public void actionPerformed(ActionEvent e)
     {
         switch(e.getSource().toString())
         {
-            case "tm": 
+            case "tm":
                 f.repaint();
                 break;
         }
@@ -157,5 +157,17 @@ public class Main
                 g2d.draw(innerCircle);
             }
         }
+    }
+
+    public void actionPerformed(ActionEvent e)
+    {
+      switch(e.getSource())
+      {
+        case "tm":
+        innerCircle.changeAngle();
+        f.rePaint();
+          break;
+
+      }
     }
 }
