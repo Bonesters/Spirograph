@@ -13,8 +13,15 @@ public class Main
 {
     //Global Variables
     public Circle outerCircle,innerCircle;
-    public Point2D penLoc;  //relative to origin of the circle
+    public JFrame f;
     public JSlider slide;
+
+    private Dimension mainSize=new Dimension(500,600);
+    private Dimension botSize=new Dimension(500,100);
+    private Dimension sliderSize=new Dimension(300,100);
+    private Dimension miscSize=new Dimension(100,100);
+    private Dimension botLeftSize=new Dimension(200,100);
+    private Dimension mainDrawSize=new Dimension(500,500);
 
 	public Main()
     {
@@ -26,11 +33,62 @@ public class Main
 
         JPanel p=new JPanel(new GridLayout(1,2));
         JPanel bot=new JPanel(new GridLayout(3,1));
-        DrawPanel d=new DrawPanel();
-        slide=new JSlider(50,250,125);
 
+        f=new JFrame("Spirograph");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setPreferredSize(mainSize);
+        f.setMaximumSize(mainSize);
+        f.setMinimumSize(mainSize);
+        f.setSize(mainSize);
+
+        //JPanel p=new JPanel(new GridLayout(2,1));
+        JPanel p=new JPanel();
+        p.setPreferredSize(mainSize);
+        p.setMaximumSize(mainSize);
+        p.setMinimumSize(mainSize);
+        p.setSize(mainSize);
+
+        DrawPanel d=new DrawPanel();
+        d.setPreferredSize(mainDrawSize);
+        d.setMaximumSize(mainDrawSize);
+        d.setMinimumSize(mainDrawSize);
+        d.setSize(mainDrawSize);
+
+        JPanel bot=new JPanel(new GridLayout(1,2));
+        bot.setPreferredSize(botSize);
+        bot.setMaximumSize(botSize);
+        bot.setMinimumSize(botSize);
+        bot.setSize(botSize);
+
+        JPanel botLeft=new JPanel(new GridLayout(1,2));
+        botLeft.setPreferredSize(botLeftSize);
+        botLeft.setMaximumSize(botLeftSize);
+        botLeft.setMinimumSize(botLeftSize);
+        botLeft.setSize(botLeftSize);
+
+        slide=new JSlider(0,250,125);
+        slide.setPreferredSize(sliderSize);
+        slide.setMaximumSize(sliderSize);
+        slide.setMinimumSize(sliderSize);
+        slide.setSize(sliderSize);
+
+        JPanel mid=new JPanel();
+        mid.setPreferredSize(miscSize);
+        mid.setMaximumSize(miscSize);
+        mid.setMinimumSize(miscSize);
+        mid.setSize(miscSize);
+
+        JPanel right=new JPanel();
+        right.setPreferredSize(miscSize);
+        right.setMaximumSize(miscSize);
+        right.setMinimumSize(miscSize);
+        right.setSize(miscSize);
 
         bot.add(slide);
+        bot.add(botLeft);
+
+        botLeft.add(mid);
+        botLeft.add(right);
 
         p.add(d);
         p.add(bot);
@@ -81,11 +139,20 @@ public class Main
     {
         public void paint(Graphics g)
         {
+            super.paint(g);
             Graphics2D g2d=(Graphics2D)g;
+
+            g2d.setColor(Color.WHITE);
+            g2d.fillRect(0,0,500,500);
+            g2d.setColor(Color.BLACK);
             if(outerCircle!=null)
+            {
                 g2d.draw(outerCircle);
+            }
             if(innerCircle!=null)
+            {
                 g2d.draw(innerCircle);
+            }
         }
     }
 
