@@ -18,13 +18,15 @@ public class Main
     {
         JFrame f=new JFrame("Spirograph");
         JPanel p=new JPanel(new GridLayout(1,2));
-        JPanel p1=new JPanel(new GridLayout(3,1));
+        JPanel bot=new JPanel(new GridLayout(3,1));
         DrawPanel d=new DrawPanel();
+        JSlider slide=new JSlider(50,250,125);
         
         
         
+        bot.add(slide);
         p.add(d);
-        p.add(p1);
+        p.add(bot);
         f.add(p);
     }
 
