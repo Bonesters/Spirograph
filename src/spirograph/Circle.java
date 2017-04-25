@@ -17,24 +17,9 @@ public class Circle extends Ellipse2D.Double
         points=new ArrayList<Point2D.Double>();
     }
     
-    public Circle(Point2D.Double origin,double radius,double angle)
-    {
-        this(origin.getX(),origin.getY(),radius,angle);
-    }
-    
     public Circle(double x,double y,double radius)
     {
         this(x-radius,y-radius,radius,0.0);
-    }
-    
-    public Circle(Point2D.Double origin,double radius)
-    {
-        this(origin.getX(),origin.getY(),radius,0.0);
-    }
-    
-    public Point2D.Double getCenter()
-    {
-        return new Point2D.Double(getCenterX(),getCenterY());
     }
     
     public double getRadius()
@@ -62,11 +47,6 @@ public class Circle extends Ellipse2D.Double
         setPos(getX(),y);
     }
     
-    public void setPos(Point2D p)
-    {
-        setPos(p.getX(),p.getY());
-    }
-    
     public void setPos(double x,double y)
     {
         move(x,y,getRadius());
@@ -85,15 +65,36 @@ public class Circle extends Ellipse2D.Double
     public void setAngle(double angle)
     {
         this.angle=angle;
-        adjustPoints();
     }
     
-    private void adjustPoints()
+    public void addPoint(Point2D.Double p)
     {
-        for(Point2D p:points)
-        {
-            
-        }
+        points.add(p);
+    }
+    
+    public void addPoint(double x,double y)
+    {
+        addPoint(new Point2D.Double(x,y));
+    }
+    
+    public void removePoint(Point2D.Double p)
+    {
+        points.remove(p);
+    }
+    
+    public void removePoint(double x,double y)
+    {
+        removePoint(new Point2D.Double(x,y));
+    }
+    
+    public boolean hasPoint(Point2D.Double p)
+    {
+        return points.contains(p);
+    }
+    
+    public boolean hasPoint(double x,double y)
+    {
+        return points.contains(new Point2D.Double(x,y));
     }
     
     private void move(double x,double y,double radius)
