@@ -17,18 +17,27 @@ public class Main
 
 	public Main()
     {
+        outerCircle=new Circle(250,250,250);
+        innerCircle=new Circle(250,0,50);
+        
         JFrame f=new JFrame("Spirograph");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         JPanel p=new JPanel(new GridLayout(1,2));
         JPanel bot=new JPanel(new GridLayout(3,1));
         DrawPanel d=new DrawPanel();
         slide=new JSlider(50,250,125);
 
 
-
         bot.add(slide);
+        
         p.add(d);
         p.add(bot);
-        f.add(p);
+        
+        f.getContentPane().add(p);
+        
+        f.pack();
+        f.setVisible(true);
     }
 
 
@@ -72,8 +81,10 @@ public class Main
         public void paint(Graphics g)
         {
             Graphics2D g2d=(Graphics2D)g;
-            g2d.draw(outerCircle);
-            g2d.draw(innerCircle);
+            if(outerCircle!=null)
+                g2d.draw(outerCircle);
+            if(innerCircle!=null)
+                g2d.draw(innerCircle);
         }
     }
 }
