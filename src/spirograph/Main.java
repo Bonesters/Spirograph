@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-Timer tm;
 
 public class Main
 {
@@ -15,6 +14,7 @@ public class Main
     public Circle outerCircle,innerCircle;
     public JFrame f;
     public JSlider slide;
+    public Timer tm;
 
     private Dimension mainSize=new Dimension(500,600);
     private Dimension botSize=new Dimension(500,100);
@@ -31,9 +31,6 @@ public class Main
         JFrame f=new JFrame("Spirograph");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel p=new JPanel(new GridLayout(1,2));
-        JPanel bot=new JPanel(new GridLayout(3,1));
-
         f=new JFrame("Spirograph");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setPreferredSize(mainSize);
@@ -41,7 +38,6 @@ public class Main
         f.setMinimumSize(mainSize);
         f.setSize(mainSize);
 
-        //JPanel p=new JPanel(new GridLayout(2,1));
         JPanel p=new JPanel();
         p.setPreferredSize(mainSize);
         p.setMaximumSize(mainSize);
@@ -132,10 +128,18 @@ public class Main
 
         return new Point2D.Double(ppx,ppy);
 	}
+	
+	public void actionPerformed(ActionEvent e)
+    {
+        switch(e.getSource().toString())
+        {
+            case "tm": 
+                f.repaint();
+                break;
+        }
+    }
 
-
-
-	class DrawPanel extends JPanel
+    class DrawPanel extends JPanel
     {
         public void paint(Graphics g)
         {
@@ -154,16 +158,5 @@ public class Main
                 g2d.draw(innerCircle);
             }
         }
-    }
-
-    public void actionPerformed(ActionEvent e)
-    {
-      switch(e.getSource())
-      {
-        case "tm": f.rePaint();
-          break;
-        case "slider" : slide.setva
-
-      }
     }
 }
