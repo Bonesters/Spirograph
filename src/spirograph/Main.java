@@ -21,7 +21,7 @@ public class Main
     private Dimension sliderSize=new Dimension(301,100);
     private Dimension miscSize=new Dimension(100,100);
     private Dimension botLeftSize=new Dimension(201,100);
-    private Dimension mainDrawSize=new Dimension(501,50`);
+    private Dimension mainDrawSize=new Dimension(501,501);
 
 	public Main()
     {
@@ -131,8 +131,10 @@ public class Main
         switch(e.getSource().toString())
         {
             case "tm":
+                innerCircle.changeAngle(0.0);
                 f.repaint();
                 break;
+
         }
     }
 
@@ -157,17 +159,5 @@ public class Main
                 g2d.draw(innerCircle);
             }
         }
-    }
-
-    public void actionPerformed(ActionEvent e)
-    {
-      switch(e.getSource())
-      {
-        case "tm":
-        innerCircle.changeAngle();
-        f.rePaint();
-          break;
-
-      }
     }
 }
