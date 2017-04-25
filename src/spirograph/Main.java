@@ -160,9 +160,10 @@ public class Main
     {
       switch(e.getSource())
       {
-        case "tm": f.rePaint();
+        case "tm":
+        innerCircle.changeAngle();
+        f.rePaint();
           break;
-        case "slider" : slide.setva
 
       }
     }
