@@ -31,7 +31,7 @@ public class Main
   }
 
 //returns the location of the pen in the greater circle
-	private Point2D getLocation(double t1,double t2,float pensliderWIP)
+	private Point2D getLocation(double t1,double t2,double pensliderWIP)
 	{
 		Point2D pp;  //pen position
 
