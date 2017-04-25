@@ -20,8 +20,8 @@ public class Main
     private Dimension botSize=new Dimension(501,100);
     private Dimension sliderSize=new Dimension(301,100);
     private Dimension miscSize=new Dimension(100,100);
-    private Dimension botLeftSize=new Dimension(200,100);
-    private Dimension mainDrawSize=new Dimension(500,500);
+    private Dimension botLeftSize=new Dimension(201,100);
+    private Dimension mainDrawSize=new Dimension(501,50`);
 
 	public Main()
     {
