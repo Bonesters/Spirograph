@@ -13,6 +13,7 @@ public class Main
     //Global Variables
     public Circle outerCircle,innerCircle;
     public Point2D penLoc;  //relative to origin of the circle
+    public JSlider slide;
 
 	public Main()
     {
@@ -20,7 +21,7 @@ public class Main
         JPanel p=new JPanel(new GridLayout(1,2));
         JPanel bot=new JPanel(new GridLayout(3,1));
         DrawPanel d=new DrawPanel();
-        JSlider slide=new JSlider(50,250,125);
+        slide=new JSlider(50,250,125);
 
 
 
@@ -42,7 +43,7 @@ public class Main
     /**
         returns the location of the pen in the greater circle
     */
-	private Point2D getLocation(double t1,double t2,float pensliderWIP)
+	private Point2D getLocation()
 	{
 
         //Point2D pp=new Point2D.Double(0.0,0.0);  //pen position
@@ -51,14 +52,14 @@ public class Main
         //calculation of the point in 2d land
         double ppx = // cx + r cos(a)
         //calculate outercircle pos
-        ((outerCircle.getRadius()-innerCircle.getRadius())*Math.cos(t1)+outerCircle.getX())
+        ((outerCircle.getRadius()-innerCircle.getRadius())*Math.cos(outerCircle.getAngle())+outerCircle.getX())
         //calculate pen pos
-        + pensliderWIP * Math.cos(t2);
+        + slide.getValue() * Math.cos(innerCircle.getAngle());
         double ppy = // cy + r sin (a)
         //calculate outercircle pos
-        ((outerCircle.getRadius()-innerCircle.getRadius())*Math.sin(t1)+outerCircle.getX())
+        ((outerCircle.getRadius()-innerCircle.getRadius())*Math.sin(outerCircle.getAngle())+outerCircle.getX())
         //calculate pen pos
-        + pensliderWIP * Math.sin(t2);
+        + slide.getValue() * Math.sin(innerCircle.getAngle());
         
 
         return new Point2D.Double(ppx,ppy);
