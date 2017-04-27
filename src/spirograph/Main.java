@@ -52,7 +52,7 @@ public class Main
         center.setMaximumSize(mainDrawSize);
         center.setMinimumSize(mainDrawSize);
         center.setSize(mainDrawSize);
-        
+
         DrawPanel d=new DrawPanel();
         d.setPreferredSize(mainDrawSize);
         d.setMaximumSize(mainDrawSize);
@@ -64,7 +64,7 @@ public class Main
         bot.setMaximumSize(botSize);
         bot.setMinimumSize(botSize);
         bot.setSize(botSize);
-        
+
         JButton button=new JButton("Start");
         button.addActionListener(new ActionListener()
         {
@@ -73,16 +73,20 @@ public class Main
                 if(running) //stop
                 {
                     button.setText("Start");
-                    
+                    tm.stop();
+
+
+
                 }
                 else        //start
                 {
                     button.setText("Stop");
-                    
+                    tm.start();
+
                 }
             }
         });
-        
+
         p.add(center);
         p.add(bot);
 
