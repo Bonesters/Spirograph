@@ -11,9 +11,9 @@ import java.awt.event.*;
 public class Main
 {
     //Global Variables
-    
+
     public boolean running=false;
-    
+
     public Circle outerCircle,innerCircle;
     public JFrame f;
     public JSlider slide;
@@ -138,9 +138,12 @@ public class Main
     {
         switch(e.getSource().toString())
         {
-            case "tm":
-                innerCircle.changeAngle(0.0);
+            case "increment":
+                outerCircle.changeAngle(0.1);
+                innerCircle.changeAngle(0.1);
                 f.repaint();
+                break;
+            case "stop":
                 break;
 
         }
