@@ -27,6 +27,7 @@ public class Main
     private Dimension botLeftSize=new Dimension(201,100);
     private Dimension mainDrawSize=new Dimension(501,501);
 
+
 	public Main()
     {
         outerCircle=new Circle(250,250,250);
@@ -95,6 +96,8 @@ public class Main
 
         f.pack();
         f.setVisible(true);
+
+        tm = new Timer(50,this);
     }
 
 
