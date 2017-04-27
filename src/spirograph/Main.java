@@ -182,12 +182,4 @@ public class Main implements ActionListener
             }
         }
     }
-
-    class Increment extends TimerTask
-    {
-        public void run()
-        {
-
-        }
-    }
 }
