@@ -5,6 +5,7 @@ import java.awt.geom.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.border.*;
 
 
 
@@ -19,13 +20,11 @@ public class Main
     public JSlider slide;
     public Timer tm;
     public Path2D.Double curve;
+    public JPanel center,draw,init;
 
-    private Dimension mainSize=new Dimension(501,601);
-    private Dimension botSize=new Dimension(501,100);
-    private Dimension sliderSize=new Dimension(301,100);
-    private Dimension miscSize=new Dimension(100,100);
-    private Dimension botLeftSize=new Dimension(201,100);
-    private Dimension mainDrawSize=new Dimension(501,501);
+    private Dimension mainSize=new Dimension(505,605);
+    private Dimension botSize=new Dimension(505,100);
+    private Dimension mainDrawSize=new Dimension(505,505);
 
 
 	public Main()
@@ -46,24 +45,35 @@ public class Main
         p.setMaximumSize(mainSize);
         p.setMinimumSize(mainSize);
         p.setSize(mainSize);
+        p.setBorder(new EmptyBorder(-1,-1,-1,-1));
 
-        JPanel center=new JPanel();
+        center=new JPanel();
         center.setPreferredSize(mainDrawSize);
         center.setMaximumSize(mainDrawSize);
         center.setMinimumSize(mainDrawSize);
         center.setSize(mainDrawSize);
+        center.setBorder(new EmptyBorder(-1,-1,-1,-1));
         
-        DrawPanel d=new DrawPanel();
-        d.setPreferredSize(mainDrawSize);
-        d.setMaximumSize(mainDrawSize);
-        d.setMinimumSize(mainDrawSize);
-        d.setSize(mainDrawSize);
+        draw=new DrawPanel();
+        draw.setPreferredSize(mainDrawSize);
+        draw.setMaximumSize(mainDrawSize);
+        draw.setMinimumSize(mainDrawSize);
+        draw.setSize(mainDrawSize);
+        draw.setBorder(new EmptyBorder(-1,-1,-1,-1));
+        
+        init=new JPanel();
+        init.setPreferredSize(mainDrawSize);
+        init.setMaximumSize(mainDrawSize);
+        init.setMinimumSize(mainDrawSize);
+        init.setSize(mainDrawSize);
+        init.setBorder(new EmptyBorder(-1,-1,-1,-1));
 
         JPanel bot=new JPanel(new BorderLayout());
         bot.setPreferredSize(botSize);
         bot.setMaximumSize(botSize);
         bot.setMinimumSize(botSize);
         bot.setSize(botSize);
+        bot.setBorder(new EmptyBorder(-1,-1,-1,-1));
         
         JButton button=new JButton("Start");
         button.addActionListener(new ActionListener()
@@ -72,16 +82,30 @@ public class Main
             {
                 if(running) //stop
                 {
+                    running=false;
+                    center.setVisible(false);
+                    center.remove(draw);
+                    center.add(init);
+                    center.setVisible(true);
                     button.setText("Start");
                     
                 }
                 else        //start
                 {
+                    running=true;
+                    center.setVisible(false);
+                    center.remove(init);
+                    center.add(draw);
+                    center.setVisible(true);
                     button.setText("Stop");
                     
                 }
             }
         });
+        
+        bot.add(button,BorderLayout.CENTER);
+        
+        center.add(init);
         
         p.add(center);
         p.add(bot);
