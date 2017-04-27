@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 
 
-public class Main implements ActionListener
+public class Main
 {
     //Global Variables
 
@@ -82,6 +82,8 @@ public class Main implements ActionListener
         right.setMaximumSize(miscSize);
         right.setMinimumSize(miscSize);
         right.setSize(miscSize);
+        
+        
 
         bot.add(slide);
         bot.add(botLeft);
@@ -97,7 +99,15 @@ public class Main implements ActionListener
         f.pack();
         f.setVisible(true);
 
-        tm = new Timer(50,this);
+        tm = new Timer(50,new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                outerCircle.changeAngle(0.1);
+                innerCircle.changeAngle(0.1);
+                f.repaint();
+            }
+        });
     }
 
 
@@ -134,14 +144,13 @@ public class Main implements ActionListener
         return new Point2D.Double(ppx,ppy);
 	}
 
+    /*
 	public void actionPerformed(ActionEvent e)
     {
         switch(e.getSource().toString())
         {
             case "increment":
-                outerCircle.changeAngle(0.1);
-                innerCircle.changeAngle(0.1);
-                f.repaint();
+                
                 break;
             case "stop":
                 tm.stop();
@@ -153,6 +162,7 @@ public class Main implements ActionListener
 
         }
     }
+    */
 
     class DrawPanel extends JPanel
     {
