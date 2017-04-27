@@ -112,7 +112,7 @@ public class Main implements ActionListener
     /**
         returns the location of the pen in the greater circle
     */
-	private Point2D getLocation() // for a circle
+	private Point2D getLocation(char a) // for a circle
 	{
 
         //Point2D pp=new Point2D.Double(0.0,0.0);  //pen position
