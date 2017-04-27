@@ -11,10 +11,14 @@ import java.awt.event.*;
 public class Main
 {
     //Global Variables
+    
+    public boolean running=false;
+    
     public Circle outerCircle,innerCircle;
     public JFrame f;
     public JSlider slide;
     public Timer tm;
+    public Path2D.Double curve;
 
     private Dimension mainSize=new Dimension(501,601);
     private Dimension botSize=new Dimension(501,100);
@@ -27,6 +31,7 @@ public class Main
     {
         outerCircle=new Circle(250,250,250);
         innerCircle=new Circle(250,50,50);
+        curve=new Path2D.Double();
 
         f=new JFrame("Spirograph");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
