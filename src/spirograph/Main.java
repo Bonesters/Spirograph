@@ -47,53 +47,43 @@ public class Main
         p.setMinimumSize(mainSize);
         p.setSize(mainSize);
 
+        JPanel center=new JPanel();
+        center.setPreferredSize(mainDrawSize);
+        center.setMaximumSize(mainDrawSize);
+        center.setMinimumSize(mainDrawSize);
+        center.setSize(mainDrawSize);
         
-
         DrawPanel d=new DrawPanel();
         d.setPreferredSize(mainDrawSize);
         d.setMaximumSize(mainDrawSize);
         d.setMinimumSize(mainDrawSize);
         d.setSize(mainDrawSize);
 
-        JPanel bot=new JPanel(new GridLayout(1,2));
+        JPanel bot=new JPanel(new BorderLayout());
         bot.setPreferredSize(botSize);
         bot.setMaximumSize(botSize);
         bot.setMinimumSize(botSize);
         bot.setSize(botSize);
-
-        JPanel botLeft=new JPanel(new GridLayout(1,2));
-        botLeft.setPreferredSize(botLeftSize);
-        botLeft.setMaximumSize(botLeftSize);
-        botLeft.setMinimumSize(botLeftSize);
-        botLeft.setSize(botLeftSize);
-
-        slide=new JSlider(0,250,125);
-        slide.setPreferredSize(sliderSize);
-        slide.setMaximumSize(sliderSize);
-        slide.setMinimumSize(sliderSize);
-        slide.setSize(sliderSize);
-
-        JPanel mid=new JPanel();
-        mid.setPreferredSize(miscSize);
-        mid.setMaximumSize(miscSize);
-        mid.setMinimumSize(miscSize);
-        mid.setSize(miscSize);
-
-        JPanel right=new JPanel();
-        right.setPreferredSize(miscSize);
-        right.setMaximumSize(miscSize);
-        right.setMinimumSize(miscSize);
-        right.setSize(miscSize);
-
-
-
-        bot.add(slide);
-        bot.add(botLeft);
-
-        botLeft.add(mid);
-        botLeft.add(right);
-
-        p.add(d);
+        
+        JButton button=new JButton("Start");
+        button.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                if(running) //stop
+                {
+                    button.setText("Start");
+                    
+                }
+                else        //start
+                {
+                    button.setText("Stop");
+                    
+                }
+            }
+        });
+        
+        p.add(center);
         p.add(bot);
 
         f.getContentPane().add(p);
