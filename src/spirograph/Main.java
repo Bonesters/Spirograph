@@ -82,8 +82,8 @@ public class Main
         right.setMaximumSize(miscSize);
         right.setMinimumSize(miscSize);
         right.setSize(miscSize);
-        
-        
+
+
 
         bot.add(slide);
         bot.add(botLeft);
@@ -105,6 +105,8 @@ public class Main
             {
                 outerCircle.changeAngle(0.1);
                 innerCircle.changeAngle(0.1);
+                Point2D m = new Point2D(getLocation());
+                curve.lineto(m.getX(),m.getY());
                 f.repaint();
             }
         });
@@ -150,7 +152,7 @@ public class Main
         switch(e.getSource().toString())
         {
             case "increment":
-                
+
                 break;
             case "stop":
                 tm.stop();
