@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 
 
-public class Main
+public class Main implements ActionListener
 {
     //Global Variables
 
@@ -121,12 +121,12 @@ public class Main
         //calculation of the point in 2d land
         double ppx = // cx + r cos(a)
         //calculate outercircle pos
-        ((outerCircle.getRadius()-innerCircle.getRadius())*Math.cos(outerCircle.getAngle())+outerCircle.getX())
+        ((outerCircle.getRadius()-innerCircle.getRadius())*Math.cos(outerCircle.getAngle())+outerCircle.getCenterX())
         //calculate pen pos
         + slide.getValue() * Math.cos(innerCircle.getAngle());
         double ppy = // cy + r sin (a)
         //calculate outercircle pos
-        ((outerCircle.getRadius()-innerCircle.getRadius())*Math.sin(outerCircle.getAngle())+outerCircle.getX())
+        ((outerCircle.getRadius()-innerCircle.getRadius())*Math.sin(outerCircle.getAngle())+outerCircle.getCenterX())
         //calculate pen pos
         + slide.getValue() * Math.sin(innerCircle.getAngle());
 
@@ -168,11 +168,17 @@ public class Main
             {
                 //System.out.println(outerCircle.getBounds().toString());
                 g2d.draw(outerCircle);
+                g2d.fillRect((int)outerCircle.getCenterX(),(int)outerCircle.getCenterY(),1,1);
             }
             if(innerCircle!=null)
             {
                 //System.out.println(innerCircle.getBounds().toString());
                 g2d.draw(innerCircle);
+                g2d.fillRect((int)innerCircle.getCenterX(),(int)innerCircle.getCenterY(),1,1);
+            }
+            if(curve!=null)
+            {
+                g2d.draw(curve);
             }
         }
     }
