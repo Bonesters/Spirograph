@@ -22,15 +22,15 @@ public class Main
     public Path2D.Double curve;
     public JPanel center,draw,init;
 
-    private Dimension mainSize=new Dimension(505,605);
+    private Dimension mainSize=new Dimension(505,610);
     private Dimension botSize=new Dimension(505,100);
-    private Dimension mainDrawSize=new Dimension(505,505);
+    private Dimension mainDrawSize=new Dimension(505,510);
 
 
 	public Main()
     {
-        outerCircle=new Circle(250,250,250);
-        innerCircle=new Circle(250,50,50);
+        outerCircle=new Circle(252,250,250);
+        innerCircle=new Circle(252,50,50);
         curve=new Path2D.Double();
 
         f=new JFrame("Spirograph");
@@ -45,7 +45,6 @@ public class Main
         p.setMaximumSize(mainSize);
         p.setMinimumSize(mainSize);
         p.setSize(mainSize);
-        p.setBorder(new EmptyBorder(-1,-1,-1,-1));
 
         center=new JPanel();
         center.setPreferredSize(mainDrawSize);
@@ -58,27 +57,24 @@ public class Main
         d.setMaximumSize(mainDrawSize);
         d.setMinimumSize(mainDrawSize);
         d.setSize(mainDrawSize);
-        center.setBorder(new EmptyBorder(-1,-1,-1,-1));
 
         draw=new DrawPanel();
         draw.setPreferredSize(mainDrawSize);
         draw.setMaximumSize(mainDrawSize);
         draw.setMinimumSize(mainDrawSize);
         draw.setSize(mainDrawSize);
-        draw.setBorder(new EmptyBorder(-1,-1,-1,-1));
 
         init=new JPanel();
         init.setPreferredSize(mainDrawSize);
         init.setMaximumSize(mainDrawSize);
         init.setMinimumSize(mainDrawSize);
         init.setSize(mainDrawSize);
-        init.setBorder(new EmptyBorder(-1,-1,-1,-1));
+        
         JPanel bot=new JPanel(new BorderLayout());
         bot.setPreferredSize(botSize);
         bot.setMaximumSize(botSize);
         bot.setMinimumSize(botSize);
         bot.setSize(botSize);
-        bot.setBorder(new EmptyBorder(-1,-1,-1,-1));
 
         JButton button=new JButton("Start");
         button.addActionListener(new ActionListener()
@@ -94,9 +90,6 @@ public class Main
                     center.setVisible(true);
                     button.setText("Start");
                     tm.stop();
-
-
-
                 }
                 else        //start
                 {
@@ -107,7 +100,6 @@ public class Main
                     center.setVisible(true);
                     button.setText("Stop");
                     tm.start();
-
                 }
             }
         });
@@ -130,8 +122,11 @@ public class Main
             {
                 outerCircle.changeAngle(0.1);
                 innerCircle.changeAngle(0.1);
-                Point2D m = getLocation();
-                curve.lineTo(m.getX(),m.getY());
+                if(innerCircle.getPoint()!=null)
+                {
+                    Point2D m = getLocation();
+                    curve.lineTo(m.getX(),m.getY());
+                }
                 f.repaint();
             }
         });
