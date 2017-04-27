@@ -47,6 +47,8 @@ public class Main
         p.setMinimumSize(mainSize);
         p.setSize(mainSize);
 
+        
+
         DrawPanel d=new DrawPanel();
         d.setPreferredSize(mainDrawSize);
         d.setMaximumSize(mainDrawSize);
@@ -105,8 +107,8 @@ public class Main
             {
                 outerCircle.changeAngle(0.1);
                 innerCircle.changeAngle(0.1);
-                Point2D m = new Point2D(getLocation());
-                curve.lineto(m.getX(),m.getY());
+                Point2D m = getLocation();
+                curve.lineTo(m.getX(),m.getY());
                 f.repaint();
             }
         });
@@ -124,7 +126,7 @@ public class Main
     /**
         returns the location of the pen in the greater circle
     */
-	private Point2D getLocation(char a) // for a circle
+	private Point2D getLocation() // for a circle
 	{
 
         //Point2D pp=new Point2D.Double(0.0,0.0);  //pen position
