@@ -144,6 +144,11 @@ public class Main
                 f.repaint();
                 break;
             case "stop":
+                tm.stop();
+                break;
+            case "start":
+                tm = new Timer(50,this);
+                tm.start();
                 break;
 
         }
@@ -171,12 +176,12 @@ public class Main
             }
         }
     }
-    
+
     class Increment extends TimerTask
     {
         public void run()
         {
-            
+
         }
     }
 }
