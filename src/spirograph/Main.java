@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.border.*;
+import javax.swing.event.*;
 
 
 
@@ -82,6 +83,29 @@ public class Main
         forceSize(initBot,initBotSize);
 
         JColorChooser colors=new JColorChooser(Color.BLACK);
+        colors.addMouseListener(new MouseListener()
+        {
+            public void mouseClicked(MouseEvent e)
+            {
+                f.repaint();
+            }
+            public void mouseEntered(MouseEvent e)
+            {
+                f.repaint();
+            }
+            public void mouseExited(MouseEvent e)
+            {
+                f.repaint();
+            }
+            public void mousePressed(MouseEvent e)
+            {
+                f.repaint();
+            }
+            public void mouseReleased(MouseEvent e)
+            {
+                f.repaint();
+            }
+        });
         forceSize(colors,colorSize);
 
         JPanel initLeft=new JPanel(new GridLayout(4,1));
@@ -92,6 +116,13 @@ public class Main
         forceSize(rText,initMini);
 
         JSlider sizePicker=new JSlider(25,200,50);
+        sizePicker.addChangeListener(new ChangeListener()
+        {
+            public void stateChanged(ChangeEvent e)
+            {
+                
+            }
+        });
         forceSize(sizePicker,initMini);
 
         JTextArea pText=new JTextArea("Location of Point");
@@ -99,15 +130,13 @@ public class Main
         forceSize(pText,initMini);
 
         JSlider pointPicker=new JSlider(0,100,50);
-        /*
         pointPicker.addChangeListener(new ChangeListener()
         {
             public void stateChanged(ChangeEvent e)
             {
-            
+                
             }
         });
-        */
         forceSize(pointPicker,initMini);
 
         JPanel initRight=new JPanel()
@@ -126,7 +155,9 @@ public class Main
                     g2d.drawOval((int)(initOther.width/2-innerCircle.getRadius()),(int)(initOther.height/2-innerCircle.getRadius()),(int)innerCircle.getWidth(),(int)innerCircle.getHeight());
                     if(innerCircle.getPoint()!=null)
                     {
-                        
+                        System.out.println(colors.getColor().toString());
+                        g2d.setColor(colors.getColor());
+                        g2d.fillRect((int)(initOther.width/2+innerCircle.getPoint().getX()-innerCircle.getCenterX()),(int)(initOther.height/2+innerCircle.getPoint().getY()-innerCircle.getCenterY()),1,1);
                     }
                 }
             }
@@ -188,12 +219,12 @@ public class Main
         f.pack();
         f.setVisible(true);
 
-        tm = new Timer(50,new ActionListener()
+        tm = new Timer(5,new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                outerCircle.changeAngle(0.1);
-                innerCircle.changeAngle(0.1);
+                outerCircle.changeAngle(0.01);
+                innerCircle.changeAngle(0.01);
                 innerCircle.setPos((outerCircle.getRadius()-innerCircle.getRadius())*Math.cos(outerCircle.getAngle())+outerCircle.getCenterX(),
                 (outerCircle.getRadius()-innerCircle.getRadius())*Math.sin(outerCircle.getAngle())+outerCircle.getCenterY());
                 if(innerCircle.getPoint()!=null)
@@ -227,7 +258,6 @@ public class Main
 	private Point2D getLocation() // for a circle
 	{
 
-        //Point2D pp=new Point2D.Double(0.0,0.0);  //pen position
         Point2D pp=innerCircle.getPoint();         //pen position
 
         //calculation of the point in 2d land
@@ -245,24 +275,5 @@ public class Main
 
         return new Point2D.Double(ppx,ppy);
 	}
-
-    /*
-	public void actionPerformed(ActionEvent e)
-    {
-        switch(e.getSource().toString())
-        {
-            case "increment":
-
-                break;
-            case "stop":
-                tm.stop();
-                break;
-            case "start":
-                tm = new Timer(50,this);
-                tm.start();
-                break;
-
-        }
-    }
-    */
+	
 }

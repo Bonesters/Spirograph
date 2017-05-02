@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Circle extends Ellipse2D.Double
 {
-    private ArrayList<Point2D.Double> points;
+    private Point2D.Double point;
 
     private double angle;
 
@@ -14,7 +14,7 @@ public class Circle extends Ellipse2D.Double
     {
         super(x,y,radius*2,radius*2);
         this.angle=angle;
-        points=new ArrayList<Point2D.Double>();
+        point=new Point2D.Double(0,0);
     }
 
     public Circle(double x,double y,double radius)
@@ -72,42 +72,19 @@ public class Circle extends Ellipse2D.Double
       this.angle+=angle;
     }
 
-    public void addPoint(Point2D.Double p)
+    public void setPoint(Point2D.Double p)
     {
-        points.add(p);
+        point=p;
     }
 
-    public void addPoint(double x,double y)
+    public void setPoint(double x,double y)
     {
-        addPoint(new Point2D.Double(x,y));
-    }
-
-    public void removePoint(Point2D.Double p)
-    {
-        points.remove(p);
-    }
-
-    public void removePoint(double x,double y)
-    {
-        removePoint(new Point2D.Double(x,y));
-    }
-
-    public boolean hasPoint(Point2D.Double p)
-    {
-        return points.contains(p);
-    }
-
-    public boolean hasPoint(double x,double y)
-    {
-        return points.contains(new Point2D.Double(x,y));
+        setPoint(new Point2D.Double(x,y));
     }
 
     public Point2D.Double getPoint()
     {
-        if(points.size()>0)
-            return points.get(0);
-        else
-            return null;
+        return point;
     }
 
     private void move(double x,double y,double radius)
