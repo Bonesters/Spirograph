@@ -13,7 +13,7 @@ public class Circle extends Ellipse2D.Double
     public Circle(double x,double y,double radius,double angle)
     {
         super(x,y,radius*2,radius*2);
-        System.out.println("x:"+(x-radius)+"\ny:"+(y-radius)+"\nh:"+(radius*2.0)+"\nw:"+(radius*2.0)+"\na:"+angle);
+        //System.out.println("x:"+(x-radius)+"\ny:"+(y-radius)+"\nh:"+(radius*2.0)+"\nw:"+(radius*2.0)+"\na:"+angle);
         this.angle=angle;
         points=new ArrayList<Point2D.Double>();
     }

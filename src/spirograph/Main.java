@@ -25,6 +25,10 @@ public class Main
     private Dimension mainSize=new Dimension(505,610);
     private Dimension botSize=new Dimension(505,100);
     private Dimension mainDrawSize=new Dimension(505,510);
+    private Dimension colorSize=new Dimension(255,510);
+    private Dimension initOther=new Dimension(250,255);
+    private Dimension initMini=new Dimension(63,125);
+    private Dimension initBotSize=new Dimension(505,255);
 
 
 	public Main()
@@ -35,46 +39,88 @@ public class Main
 
         f=new JFrame("Spirograph");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setPreferredSize(mainSize);
-        f.setMaximumSize(mainSize);
-        f.setMinimumSize(mainSize);
-        f.setSize(mainSize);
+        forceSize(f,mainSize);
 
         JPanel p=new JPanel();
-        p.setPreferredSize(mainSize);
-        p.setMaximumSize(mainSize);
-        p.setMinimumSize(mainSize);
-        p.setSize(mainSize);
+        forceSize(p,mainSize);
 
         center=new JPanel();
-        center.setPreferredSize(mainDrawSize);
-        center.setMaximumSize(mainDrawSize);
-        center.setMinimumSize(mainDrawSize);
-        center.setSize(mainDrawSize);
+        forceSize(center,mainDrawSize);
 
-        DrawPanel d=new DrawPanel();
-        d.setPreferredSize(mainDrawSize);
-        d.setMaximumSize(mainDrawSize);
-        d.setMinimumSize(mainDrawSize);
-        d.setSize(mainDrawSize);
+        draw=new JPanel()
+        {
+            public void paint(Graphics g)
+            {
+                super.paint(g);
+                Graphics2D g2d=(Graphics2D)g;
 
-        draw=new DrawPanel();
-        draw.setPreferredSize(mainDrawSize);
-        draw.setMaximumSize(mainDrawSize);
-        draw.setMinimumSize(mainDrawSize);
-        draw.setSize(mainDrawSize);
+                g2d.setColor(Color.WHITE);
+                g2d.fillRect(0,0,500,500);
+                g2d.setColor(Color.BLACK);
+                if(outerCircle!=null)
+                {
+                    //System.out.println(outerCircle.getBounds().toString());
+                    g2d.draw(outerCircle);
+                    g2d.fillRect((int)outerCircle.getCenterX(),(int)outerCircle.getCenterY(),1,1);
+                }
+                if(innerCircle!=null)
+                {
+                    //System.out.println(innerCircle.getBounds().toString());
+                    g2d.draw(innerCircle);
+                    g2d.fillRect((int)innerCircle.getCenterX(),(int)innerCircle.getCenterY(),1,1);
+                }
+                if(curve!=null)
+                {
+                    g2d.draw(curve);
+                }
+            }
+        };
+        forceSize(draw,mainDrawSize);
 
-        init=new JPanel();
-        init.setPreferredSize(mainDrawSize);
-        init.setMaximumSize(mainDrawSize);
-        init.setMinimumSize(mainDrawSize);
-        init.setSize(mainDrawSize);
+        init=new JPanel(new GridLayout(2,1));
+        forceSize(init,mainDrawSize);
+        
+        JPanel initBot=new JPanel(new GridLayout(1,2));
+        forceSize(initBot,initBotSize);
+        
+        JColorChooser colors=new JColorChooser(Color.BLACK);
+        forceSize(colors,colorSize);
+        
+        JPanel initLeft=new JPanel(new GridLayout(4,1));
+        forceSize(initLeft,initOther);
+        
+        JTextArea rText=new JTextArea("Radius of Circle");
+        rText.setEditable(false);
+        forceSize(rText,initMini);
+        
+        JSlider sizePicker=new JSlider(25,200,50);
+        forceSize(sizePicker,initMini);
+        
+        JTextArea pText=new JTextArea("Location of Point");
+        pText.setEditable(false);
+        forceSize(pText,initMini);
+        
+        JSlider pointPicker=new JSlider(0,100,50);
+        forceSize(pointPicker,initMini);
+        
+        JPanel initRight=new JPanel()
+        {
+            public void paint(Graphics g)
+            {
+                super.paint(g);
+                Graphics2D g2d=(Graphics2D)g;
+
+                g2d.setColor(Color.WHITE);
+                g2d.fillRect(0,0,initOther.width,initOther.height);
+                g2d.setColor(Color.BLACK);
+                
+                g2d.draw(innerCircle);
+            }
+        };
+        forceSize(initRight,initOther);
         
         JPanel bot=new JPanel(new BorderLayout());
-        bot.setPreferredSize(botSize);
-        bot.setMaximumSize(botSize);
-        bot.setMinimumSize(botSize);
-        bot.setSize(botSize);
+        forceSize(bot,botSize);
 
         JButton button=new JButton("Start");
         button.addActionListener(new ActionListener()
@@ -106,6 +152,18 @@ public class Main
 
         bot.add(button,BorderLayout.CENTER);
 
+        initLeft.add(rText);
+        initLeft.add(sizePicker);
+        
+        initLeft.add(pText);
+        initLeft.add(pointPicker);
+
+        initBot.add(initLeft);
+        initBot.add(initRight);
+
+        init.add(initBot);
+        init.add(colors);
+
         center.add(init);
         
         p.add(center);
@@ -132,7 +190,13 @@ public class Main
         });
     }
 
-
+    private void forceSize(Component c,Dimension d)
+    {
+        c.setPreferredSize(d);
+        c.setMaximumSize(d);
+        c.setMinimumSize(d);
+        c.setSize(d);
+    }
 
     public static void main(String[] args)
     {
@@ -185,33 +249,4 @@ public class Main
         }
     }
     */
-
-    class DrawPanel extends JPanel
-    {
-        public void paint(Graphics g)
-        {
-            super.paint(g);
-            Graphics2D g2d=(Graphics2D)g;
-
-            g2d.setColor(Color.WHITE);
-            g2d.fillRect(0,0,500,500);
-            g2d.setColor(Color.BLACK);
-            if(outerCircle!=null)
-            {
-                //System.out.println(outerCircle.getBounds().toString());
-                g2d.draw(outerCircle);
-                g2d.fillRect((int)outerCircle.getCenterX(),(int)outerCircle.getCenterY(),1,1);
-            }
-            if(innerCircle!=null)
-            {
-                //System.out.println(innerCircle.getBounds().toString());
-                g2d.draw(innerCircle);
-                g2d.fillRect((int)innerCircle.getCenterX(),(int)innerCircle.getCenterY(),1,1);
-            }
-            if(curve!=null)
-            {
-                g2d.draw(curve);
-            }
-        }
-    }
 }
