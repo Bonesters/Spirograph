@@ -55,17 +55,15 @@ public class Main
                 Graphics2D g2d=(Graphics2D)g;
 
                 g2d.setColor(Color.WHITE);
-                g2d.fillRect(0,0,500,500);
+                g2d.fillRect(0,0,mainDrawSize.width,mainDrawSize.height);
                 g2d.setColor(Color.BLACK);
                 if(outerCircle!=null)
                 {
-                    //System.out.println(outerCircle.getBounds().toString());
                     g2d.draw(outerCircle);
                     g2d.fillRect((int)outerCircle.getCenterX(),(int)outerCircle.getCenterY(),1,1);
                 }
                 if(innerCircle!=null)
                 {
-                    //System.out.println(innerCircle.getBounds().toString());
                     g2d.draw(innerCircle);
                     g2d.fillRect((int)innerCircle.getCenterX(),(int)innerCircle.getCenterY(),1,1);
                 }
@@ -101,6 +99,13 @@ public class Main
         forceSize(pText,initMini);
         
         JSlider pointPicker=new JSlider(0,100,50);
+        pointPicker.addChangeListener(new ChangeListener()
+        {
+            public void stateChanged(ChangeEvent e)
+            {
+            
+            }
+        });
         forceSize(pointPicker,initMini);
         
         JPanel initRight=new JPanel()
@@ -114,7 +119,14 @@ public class Main
                 g2d.fillRect(0,0,initOther.width,initOther.height);
                 g2d.setColor(Color.BLACK);
                 
-                g2d.draw(innerCircle);
+                if(innerCircle!=null)
+                {
+                    g2d.drawOval((int)(initOther.width/2-innerCircle.getRadius()),(int)(initOther.height/2-innerCircle.getRadius()),(int)innerCircle.getWidth(),(int)innerCircle.getHeight());
+                    if(innerCircle.getPoint()!=null)
+                    {
+                        
+                    }
+                }
             }
         };
         forceSize(initRight,initOther);
