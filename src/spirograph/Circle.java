@@ -112,6 +112,6 @@ public class Circle extends Ellipse2D.Double
 
     private void move(double x,double y,double radius)
     {
-        super.setFrame(x-radius,y-radius,radius*2f,radius*2f);
+        super.setFrame(x,y,radius*2f,radius*2f);
     }
 }
