@@ -79,30 +79,30 @@ public class Main
 
         init=new JPanel(new GridLayout(2,1));
         forceSize(init,mainDrawSize);
-        
+
         JPanel initBot=new JPanel(new GridLayout(1,2));
         forceSize(initBot,initBotSize);
-        
+
         JColorChooser colors=new JColorChooser(Color.BLACK);
         forceSize(colors,colorSize);
-        
+
         JPanel initLeft=new JPanel(new GridLayout(4,1));
         forceSize(initLeft,initOther);
-        
+
         JTextArea rText=new JTextArea("Radius of Circle");
         rText.setEditable(false);
         forceSize(rText,initMini);
-        
+
         JSlider sizePicker=new JSlider(25,200,50);
         forceSize(sizePicker,initMini);
-        
+
         JTextArea pText=new JTextArea("Location of Point");
         pText.setEditable(false);
         forceSize(pText,initMini);
-        
+
         JSlider pointPicker=new JSlider(0,100,50);
         forceSize(pointPicker,initMini);
-        
+
         JPanel initRight=new JPanel()
         {
             public void paint(Graphics g)
@@ -113,12 +113,12 @@ public class Main
                 g2d.setColor(Color.WHITE);
                 g2d.fillRect(0,0,initOther.width,initOther.height);
                 g2d.setColor(Color.BLACK);
-                
+
                 g2d.draw(innerCircle);
             }
         };
         forceSize(initRight,initOther);
-        
+
         JPanel bot=new JPanel(new BorderLayout());
         forceSize(bot,botSize);
 
@@ -154,7 +154,7 @@ public class Main
 
         initLeft.add(rText);
         initLeft.add(sizePicker);
-        
+
         initLeft.add(pText);
         initLeft.add(pointPicker);
 
@@ -165,7 +165,7 @@ public class Main
         init.add(colors);
 
         center.add(init);
-        
+
         p.add(center);
         p.add(bot);
 
@@ -180,6 +180,8 @@ public class Main
             {
                 outerCircle.changeAngle(0.1);
                 innerCircle.changeAngle(0.1);
+                innerCircle.setPos((outerCircle.getRadius()-innerCircle.getRadius())*Math.cos(outerCircle.getAngle())+outerCircle.getCenterX(),
+                (outerCircle.getRadius()-innerCircle.getRadius())*Math.sin(outerCircle.getAngle())+outerCircle.getCenterY());
                 if(innerCircle.getPoint()!=null)
                 {
                     Point2D m = getLocation();
@@ -222,7 +224,7 @@ public class Main
         + slide.getValue() * Math.cos(innerCircle.getAngle());
         double ppy = // cy + r sin (a)
         //calculate outercircle pos
-        ((outerCircle.getRadius()-innerCircle.getRadius())*Math.sin(outerCircle.getAngle())+outerCircle.getCenterX())
+        ((outerCircle.getRadius()-innerCircle.getRadius())*Math.sin(outerCircle.getAngle())+outerCircle.getCenterY())
         //calculate pen pos
         + slide.getValue() * Math.sin(innerCircle.getAngle());
 
