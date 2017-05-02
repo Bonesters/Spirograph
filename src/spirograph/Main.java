@@ -149,7 +149,7 @@ public class Main
                 g2d.setColor(Color.WHITE);
                 g2d.fillRect(0,0,initOther.width,initOther.height);
                 g2d.setColor(Color.BLACK);
-                
+
                 if(innerCircle!=null)
                 {
                     g2d.drawOval((int)(initOther.width/2-innerCircle.getRadius()),(int)(initOther.height/2-innerCircle.getRadius()),(int)innerCircle.getWidth(),(int)innerCircle.getHeight());
@@ -259,21 +259,21 @@ public class Main
 	{
 
         Point2D pp=innerCircle.getPoint();         //pen position
+        double pr = Math.sqrt(Math.pow(pp.getX()-innerCircle.getX(),2) + Math.pow(pp.getY() - innerCircle.getY(),2));
 
         //calculation of the point in 2d land
         double ppx = // cx + r cos(a)
         //calculate outercircle pos
         ((outerCircle.getRadius()-innerCircle.getRadius())*Math.cos(outerCircle.getAngle())+outerCircle.getCenterX())
         //calculate pen pos
-        + slide.getValue() * Math.cos(innerCircle.getAngle());
+        + pr * Math.cos(innerCircle.getAngle());
         double ppy = // cy + r sin (a)
         //calculate outercircle pos
         ((outerCircle.getRadius()-innerCircle.getRadius())*Math.sin(outerCircle.getAngle())+outerCircle.getCenterY())
         //calculate pen pos
-        + slide.getValue() * Math.sin(innerCircle.getAngle());
+        + pr* Math.sin(innerCircle.getAngle());
 
 
         return new Point2D.Double(ppx,ppy);
 	}
-	
 }
