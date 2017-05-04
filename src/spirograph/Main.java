@@ -155,6 +155,7 @@ public class Main
                     center.add(draw);
                     center.setVisible(true);
                     button.setText("Stop");
+                    curve.moveTo(innerCircle.getPointX(),innerCircle.getPointY());
                     tm.start();
                     initRight.repaint();
                     draw.repaint();
