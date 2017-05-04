@@ -59,6 +59,19 @@ public class Main
             {
                 super.paint(g);
                 paintSpirograph(g);
+                Graphics2D g2d=(Graphics2D)g;
+                if(innerCircle!=null)
+                {
+                    g2d.draw(innerCircle);
+                    g2d.fillRect((int)innerCircle.getCenterX(),(int)innerCircle.getCenterY(),1,1);
+                    if(innerCircle.getPoint()!=null)
+                    {
+                        g2d.setColor(colors.getColor());
+                        g2d.fillOval((int)(innerCircle.getPointX()-2),(int)(innerCircle.getPointY()-2),5,5);
+                        g2d.setColor(Color.BLACK);
+                        g2d.drawOval((int)(innerCircle.getPointX()-2),(int)(innerCircle.getPointY()-2),5,5);
+                    }
+                }
             }
         };
         x=0;
@@ -303,18 +316,6 @@ public class Main
         {
             g2d.draw(outerCircle);
             g2d.fillRect((int)outerCircle.getCenterX(),(int)outerCircle.getCenterY(),1,1);
-        }
-        if(innerCircle!=null)
-        {
-            g2d.draw(innerCircle);
-            g2d.fillRect((int)innerCircle.getCenterX(),(int)innerCircle.getCenterY(),1,1);
-            if(innerCircle.getPoint()!=null)
-            {
-                g2d.setColor(colors.getColor());
-                g2d.fillOval((int)(innerCircle.getPointX()-2),(int)(innerCircle.getPointY()-2),5,5);
-                g2d.setColor(Color.BLACK);
-                g2d.drawOval((int)(innerCircle.getPointX()-2),(int)(innerCircle.getPointY()-2),5,5);
-            }
         }
         for(int i=0;i<spirals.size();i++)
         {
