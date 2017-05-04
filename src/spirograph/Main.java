@@ -19,7 +19,6 @@ public class Main
 
     public Circle outerCircle,innerCircle;
     public JFrame f;
-    public JSlider slide;
     public Timer tm;
     public Path2D.Double curve;
     public JPanel center,draw,init;
@@ -130,6 +129,13 @@ public class Main
                     center.setVisible(true);
                     button.setText("Start");
                     tm.stop();
+                    outerCircle.setAngle(0);
+                    innerCircle.setAngle(0);
+                    sizePicker.setValue(50);
+                    innerCircle.setRadius(sizePicker.getValue());
+                    innerCircle.setY(innerCircle.getRadius());
+                    innerCircle.setX(252);
+                    curve=new Path2D.Double();
                     initRight.repaint();
                     draw.repaint();
                 }
@@ -141,6 +147,8 @@ public class Main
                     center.add(draw);
                     center.setVisible(true);
                     button.setText("Stop");
+                    spirals.add(curve);
+                    spiralColors.add(colors.getColor());
                     curve.moveTo(innerCircle.getPointX(),innerCircle.getPointY());
                     tm.start();
                     initRight.repaint();
@@ -246,10 +254,10 @@ public class Main
                 g2d.drawOval((int)(innerCircle.getPointX()-2),(int)(innerCircle.getPointY()-2),5,5);
             }
         }
-        if(curve!=null)
+        for(int i=0;i<spirals.size();i++)
         {
-            g2d.setColor(colors.getColor());
-            g2d.draw(curve);
+            g2d.setColor(spiralColors.get(i));
+            g2d.draw(spirals.get(i));
         }
     }
 }
