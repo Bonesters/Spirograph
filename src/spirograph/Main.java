@@ -106,23 +106,23 @@ public class Main
         {
             public void mouseClicked(MouseEvent e)
             {
-                f.repaint();
+                initRight.repaint();
             }
             public void mouseEntered(MouseEvent e)
             {
-                f.repaint();
+                initRight.repaint();
             }
             public void mouseExited(MouseEvent e)
             {
-                f.repaint();
+                initRight.repaint();
             }
             public void mousePressed(MouseEvent e)
             {
-                f.repaint();
+                initRight.repaint();
             }
             public void mouseReleased(MouseEvent e)
             {
-                f.repaint();
+                initRight.repaint();
             }
         });
         rText.setEditable(false);
@@ -132,7 +132,7 @@ public class Main
             {
                 innerCircle.setRadius(sizePicker.getValue());
                 innerCircle.setY(sizePicker.getValue());
-                
+                initRight.repaint();
             }
         });
         pText.setEditable(false);
@@ -140,7 +140,7 @@ public class Main
         {
             public void stateChanged(ChangeEvent e)
             {
-                
+                initRight.repaint();
             }
         });
         button.addActionListener(new ActionListener()
@@ -156,6 +156,8 @@ public class Main
                     center.setVisible(true);
                     button.setText("Start");
                     tm.stop();
+                    initRight.repaint();
+                    draw.repaint();
                 }
                 else        //start
                 {
@@ -166,6 +168,8 @@ public class Main
                     center.setVisible(true);
                     button.setText("Stop");
                     tm.start();
+                    initRight.repaint();
+                    draw.repaint();
                 }
             }
         });
@@ -221,7 +225,8 @@ public class Main
                     Point2D m = getLocation();
                     curve.lineTo(m.getX(),m.getY());
                 }
-                f.repaint();
+                initRight.repaint();
+                draw.repaint();
             }
         });
     }
