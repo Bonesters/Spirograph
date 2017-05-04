@@ -60,6 +60,7 @@ public class Main
                 super.paint(g);
                 paintSpirograph(g);
                 Graphics2D g2d=(Graphics2D)g;
+                g2d.setColor(Color.BLACK);
                 if(innerCircle!=null)
                 {
                     g2d.draw(innerCircle);
