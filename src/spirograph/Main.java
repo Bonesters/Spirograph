@@ -92,7 +92,7 @@ public class Main
                     {
                         System.out.println(colors.getColor().toString());
                         g2d.setColor(colors.getColor());
-                        
+                        g2d.fillRect((int)(initOther.width/2+innerCircle.getPointX()-innerCircle.getCenterX())-1,(int)(initOther.height/2)-1,3,3);
                     }
                 }
             }
@@ -132,6 +132,7 @@ public class Main
             {
                 innerCircle.setRadius(sizePicker.getValue());
                 innerCircle.setY(sizePicker.getValue());
+                innerCircle.setPoint((int)(252.0+((pointPicker.getValue()/100.0)*innerCircle.getRadius())),innerCircle.getY());
                 initRight.repaint();
             }
         });
@@ -140,6 +141,7 @@ public class Main
         {
             public void stateChanged(ChangeEvent e)
             {
+                innerCircle.setPoint((int)(252.0+((pointPicker.getValue()/100.0)*innerCircle.getRadius())),50);
                 initRight.repaint();
             }
         });

@@ -86,6 +86,16 @@ public class Circle extends Ellipse2D.Double
     {
         return point;
     }
+    
+    public double getPointX()
+    {
+        return getPoint().getX();
+    }
+    
+    public double getPointY()
+    {
+        return getPoint().getY();
+    }
 
     private void move(double x,double y,double radius)
     {
