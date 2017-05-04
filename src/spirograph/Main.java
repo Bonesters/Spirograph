@@ -157,7 +157,7 @@ public class Main
                     {
                         System.out.println(colors.getColor().toString());
                         g2d.setColor(colors.getColor());
-                        g2d.fillRect((int)(initOther.width/2+innerCircle.getPoint().getX()-innerCircle.getCenterX()),(int)(initOther.height/2+innerCircle.getPoint().getY()-innerCircle.getCenterY()),1,1);
+                        
                     }
                 }
             }
