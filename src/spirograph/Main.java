@@ -62,7 +62,7 @@ public class Main
         JPanel initBot=new JPanel(new GridLayout(1,2));
         JPanel initLeft=new JPanel(new GridLayout(4,1));
         JTextArea rText=new JTextArea("Radius of Circle");
-        JSlider sizePicker=new JSlider(25,200,50);
+        JSlider sizePicker=new JSlider(25,125,50);
         JTextArea pText=new JTextArea("Location of Point");
         JSlider pointPicker=new JSlider(0,100,50);
         JPanel initRight=new JPanel()
@@ -87,7 +87,10 @@ public class Main
         };
 
         JPanel bot=new JPanel(new BorderLayout());
+        JPanel buttonHolder=new JPanel(new GridLayout(1,3));
         JButton button=new JButton("Start");
+        JButton reset=new JButton("Reset");
+        JButton save=new JButton("Save image");
 
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         colors.getSelectionModel().addChangeListener(new ChangeListener()
@@ -133,9 +136,11 @@ public class Main
                     outerCircle.setAngle(0);
                     innerCircle.setAngle(0);
                     sizePicker.setValue(50);
+                    pointPicker.setValue(50);
                     innerCircle.setRadius(sizePicker.getValue());
                     innerCircle.setY(innerCircle.getRadius());
                     innerCircle.setX(252);
+                    innerCircle.setPoint((int)(252.0+((pointPicker.getValue()/100.0)*innerCircle.getRadius())),innerCircle.getCenterY());
                     curve=new Path2D.Double();
                     initRight.repaint();
                     draw.repaint();
@@ -157,7 +162,43 @@ public class Main
                 }
             }
         });
+        reset.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                running=false;
+                center.setVisible(false);
+                center.remove(draw);
+                center.add(init);
+                center.setVisible(true);
+                button.setText("Start");
+                tm.stop();
+                outerCircle.setAngle(0);
+                innerCircle.setAngle(0);
+                sizePicker.setValue(50);
+                pointPicker.setValue(50);
+                innerCircle.setRadius(sizePicker.getValue());
+                innerCircle.setY(innerCircle.getRadius());
+                innerCircle.setX(252);
+                innerCircle.setPoint((int)(252.0+((pointPicker.getValue()/100.0)*innerCircle.getRadius())),innerCircle.getCenterY());
+                curve=new Path2D.Double();
+                spirals=new ArrayList<Path2D.Double>();
+                spiralColors=new ArrayList<Color>();
+                colors.setColor(Color.BLACK);
+                initRight.repaint();
+                draw.repaint();
+            }
+        });
+        save.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                
+            }
+        });
         innerCircle.setPoint((int)(252.0+((pointPicker.getValue()/100.0)*innerCircle.getRadius())),innerCircle.getCenterY());
+        pText.setBorder(new MatteBorder(23,72,23,72,f.getBackground()));
+        rText.setBorder(new MatteBorder(23,78,23,78,f.getBackground()));
         forceSize(f,mainSize);
         forceSize(p,mainSize);
         forceSize(center,mainDrawSize);
@@ -172,8 +213,12 @@ public class Main
         forceSize(pointPicker,initMini);
         forceSize(initRight,initOther);
         forceSize(bot,botSize);
+        
+        buttonHolder.add(save);
+        buttonHolder.add(button);
+        buttonHolder.add(reset);
 
-        bot.add(button,BorderLayout.CENTER);
+        bot.add(buttonHolder,BorderLayout.CENTER);
 
         initLeft.add(rText);
         initLeft.add(sizePicker);
