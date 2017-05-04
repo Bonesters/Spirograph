@@ -34,20 +34,13 @@ public class Main
 
 	public Main()
     {
+        
         outerCircle=new Circle(252,250,250);
         innerCircle=new Circle(252,50,50);
         curve=new Path2D.Double();
-
         f=new JFrame("Spirograph");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        forceSize(f,mainSize);
-
         JPanel p=new JPanel();
-        forceSize(p,mainSize);
-
         center=new JPanel();
-        forceSize(center,mainDrawSize);
-
         draw=new JPanel()
         {
             public void paint(Graphics g)
@@ -74,15 +67,41 @@ public class Main
                 }
             }
         };
-        forceSize(draw,mainDrawSize);
 
         init=new JPanel(new GridLayout(2,1));
-        forceSize(init,mainDrawSize);
-
         JPanel initBot=new JPanel(new GridLayout(1,2));
-        forceSize(initBot,initBotSize);
-
         JColorChooser colors=new JColorChooser(Color.BLACK);
+        JPanel initLeft=new JPanel(new GridLayout(4,1));
+        JTextArea rText=new JTextArea("Radius of Circle");
+        JSlider sizePicker=new JSlider(25,200,50);
+        JTextArea pText=new JTextArea("Location of Point");
+        JSlider pointPicker=new JSlider(0,100,50);
+        JPanel initRight=new JPanel()
+        {
+            public void paint(Graphics g)
+            {
+                super.paint(g);
+                Graphics2D g2d=(Graphics2D)g;
+                g2d.setColor(Color.WHITE);
+                g2d.fillRect(0,0,initOther.width,initOther.height);
+                g2d.setColor(Color.BLACK);
+                if(innerCircle!=null)
+                {
+                    g2d.drawOval((int)(initOther.width/2-innerCircle.getRadius()),(int)(initOther.height/2-innerCircle.getRadius()),(int)innerCircle.getWidth(),(int)innerCircle.getHeight());
+                    if(innerCircle.getPoint()!=null)
+                    {
+                        System.out.println(colors.getColor().toString());
+                        g2d.setColor(colors.getColor());
+                        
+                    }
+                }
+            }
+        };
+
+        JPanel bot=new JPanel(new BorderLayout());
+        JButton button=new JButton("Start");
+
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         colors.addMouseListener(new MouseListener()
         {
             public void mouseClicked(MouseEvent e)
@@ -106,30 +125,17 @@ public class Main
                 f.repaint();
             }
         });
-        forceSize(colors,colorSize);
-
-        JPanel initLeft=new JPanel(new GridLayout(4,1));
-        forceSize(initLeft,initOther);
-
-        JTextArea rText=new JTextArea("Radius of Circle");
         rText.setEditable(false);
-        forceSize(rText,initMini);
-
-        JSlider sizePicker=new JSlider(25,200,50);
         sizePicker.addChangeListener(new ChangeListener()
         {
             public void stateChanged(ChangeEvent e)
             {
+                innerCircle.setRadius(sizePicker.getValue());
+                innerCircle.setY(sizePicker.getValue());
                 
             }
         });
-        forceSize(sizePicker,initMini);
-
-        JTextArea pText=new JTextArea("Location of Point");
         pText.setEditable(false);
-        forceSize(pText,initMini);
-
-        JSlider pointPicker=new JSlider(0,100,50);
         pointPicker.addChangeListener(new ChangeListener()
         {
             public void stateChanged(ChangeEvent e)
@@ -137,37 +143,6 @@ public class Main
                 
             }
         });
-        forceSize(pointPicker,initMini);
-
-        JPanel initRight=new JPanel()
-        {
-            public void paint(Graphics g)
-            {
-                super.paint(g);
-                Graphics2D g2d=(Graphics2D)g;
-
-                g2d.setColor(Color.WHITE);
-                g2d.fillRect(0,0,initOther.width,initOther.height);
-                g2d.setColor(Color.BLACK);
-
-                if(innerCircle!=null)
-                {
-                    g2d.drawOval((int)(initOther.width/2-innerCircle.getRadius()),(int)(initOther.height/2-innerCircle.getRadius()),(int)innerCircle.getWidth(),(int)innerCircle.getHeight());
-                    if(innerCircle.getPoint()!=null)
-                    {
-                        System.out.println(colors.getColor().toString());
-                        g2d.setColor(colors.getColor());
-                        
-                    }
-                }
-            }
-        };
-        forceSize(initRight,initOther);
-
-        JPanel bot=new JPanel(new BorderLayout());
-        forceSize(bot,botSize);
-
-        JButton button=new JButton("Start");
         button.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -194,6 +169,20 @@ public class Main
                 }
             }
         });
+        forceSize(f,mainSize);
+        forceSize(p,mainSize);
+        forceSize(center,mainDrawSize);
+        forceSize(draw,mainDrawSize);
+        forceSize(init,mainDrawSize);
+        forceSize(initBot,initBotSize);
+        forceSize(colors,colorSize);
+        forceSize(initLeft,initOther);
+        forceSize(rText,initMini);
+        forceSize(sizePicker,initMini);
+        forceSize(pText,initMini);
+        forceSize(pointPicker,initMini);
+        forceSize(initRight,initOther);
+        forceSize(bot,botSize);
 
         bot.add(button,BorderLayout.CENTER);
 
