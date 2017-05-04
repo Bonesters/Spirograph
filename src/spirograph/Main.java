@@ -212,9 +212,14 @@ public class Main
             {
                 try{
                 BufferedImage screenshot = new BufferedImage(mainDrawSize.width,mainDrawSize.height,BufferedImage.TYPE_INT_RGB);
+                File f1 = new File("screenshot_"+x+".png");
+                while(f1.exists())
+                {
+                    x++;
+                    f1 = new File("screenshot_"+x+".png");
+                }
                 paintSpirograph(screenshot.getGraphics());
-                x++;
-                ImageIO.write(screenshot,"PNG",new File("screenshot_"+x+".png"));
+                ImageIO.write(screenshot,"PNG",f1);
                 }catch(Exception E){
                     E.printStackTrace();
                 }
