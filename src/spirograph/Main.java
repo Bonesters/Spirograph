@@ -23,6 +23,7 @@ public class Main
     public Path2D.Double curve;
     public JPanel center,draw,init;
     public JColorChooser colors;
+    public BufferedImage screenshot;
     
     private ArrayList<Path2D.Double> spirals;
     private ArrayList<Color> spiralColors;
@@ -229,6 +230,11 @@ public class Main
         Main m=new Main();
     }
 
+    public boolean save(String name);
+    {
+        Graphics current_layer
+        ImageIo.write(current_layer,"PNG",new File(name+".png"));
+    }
 
     public void paintSpirograph(Graphics g)
     {
