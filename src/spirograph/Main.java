@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
+import java.util.ArrayList;
 
 
 
@@ -22,6 +23,10 @@ public class Main
     public Timer tm;
     public Path2D.Double curve;
     public JPanel center,draw,init;
+    public JColorChooser colors;
+    
+    private ArrayList<Path2D.Double> spirals;
+    private ArrayList<Color> spiralColors;
 
     private Dimension mainSize=new Dimension(505,610);
     private Dimension botSize=new Dimension(505,100);
@@ -34,7 +39,8 @@ public class Main
 
 	public Main()
     {
-        
+        spirals=new ArrayList<Path2D.Double>();
+        spiralColors=new ArrayList<Color>();
         outerCircle=new Circle(252,250,250);
         innerCircle=new Circle(252,50,50);
         innerCircle.setPoint(innerCircle.getCenterX(),innerCircle.getCenterY());
@@ -42,39 +48,13 @@ public class Main
         f=new JFrame("Spirograph");
         JPanel p=new JPanel();
         center=new JPanel();
-        JColorChooser colors=new JColorChooser(Color.BLACK);
+        colors=new JColorChooser(Color.BLACK);
         draw=new JPanel()
         {
             public void paint(Graphics g)
             {
                 super.paint(g);
-                Graphics2D g2d=(Graphics2D)g;
-
-                g2d.setColor(Color.WHITE);
-                g2d.fillRect(0,0,mainDrawSize.width,mainDrawSize.height);
-                g2d.setColor(Color.BLACK);
-                if(outerCircle!=null)
-                {
-                    g2d.draw(outerCircle);
-                    g2d.fillRect((int)outerCircle.getCenterX(),(int)outerCircle.getCenterY(),1,1);
-                }
-                if(innerCircle!=null)
-                {
-                    g2d.draw(innerCircle);
-                    g2d.fillRect((int)innerCircle.getCenterX(),(int)innerCircle.getCenterY(),1,1);
-                    if(innerCircle.getPoint()!=null)
-                    {
-                        g2d.setColor(colors.getColor());
-                        g2d.fillOval((int)(innerCircle.getPointX()-2),(int)(innerCircle.getPointY()-2),5,5);
-                        g2d.setColor(Color.BLACK);
-                        g2d.drawOval((int)(innerCircle.getPointX()-2),(int)(innerCircle.getPointY()-2),5,5);
-                    }
-                }
-                if(curve!=null)
-                {
-                    g2d.setColor(colors.getColor());
-                    g2d.draw(curve);
-                }
+                paintSpirograph(g);
             }
         };
 
@@ -218,7 +198,6 @@ public class Main
                 innerCircle.changeAngle(0.01*(outerCircle.getRadius()/innerCircle.getRadius()));
                 if(innerCircle.getPoint()!=null)
                 {
-                    //Point2D m = getLocation();
                     Point2D m=innerCircle.getPoint();
                     curve.lineTo(m.getX(),m.getY());
                 }
@@ -243,28 +222,34 @@ public class Main
     }
 
 
-    /**
-        returns the location of the pen in the greater circle
-    */
-	private Point2D getLocation() // for a circle
-	{
+    public void paintSpirograph(Graphics g)
+    {
+        Graphics2D g2d=(Graphics2D)g;
 
-        Point2D pp=innerCircle.getPoint();         //pen position
-        double pr = Math.sqrt(Math.pow(pp.getX()-innerCircle.getX(),2) + Math.pow(pp.getY() - innerCircle.getY(),2));
-
-        //calculation of the point in 2d land
-        double ppx = // cx + r cos(a)
-        //calculate outercircle pos
-        ((outerCircle.getRadius()-innerCircle.getRadius())*Math.cos(outerCircle.getAngle())+outerCircle.getCenterX())
-        //calculate pen pos
-        + pr * Math.cos(innerCircle.getAngle());
-        double ppy = // cy + r sin (a)
-        //calculate outercircle pos
-        ((outerCircle.getRadius()-innerCircle.getRadius())*Math.sin(outerCircle.getAngle())+outerCircle.getCenterY())
-        //calculate pen pos
-        + pr* Math.sin(innerCircle.getAngle());
-
-
-        return new Point2D.Double(ppx,ppy);
-	}
+        g2d.setColor(Color.WHITE);
+        g2d.fillRect(0,0,mainDrawSize.width,mainDrawSize.height);
+        g2d.setColor(Color.BLACK);
+        if(outerCircle!=null)
+        {
+            g2d.draw(outerCircle);
+            g2d.fillRect((int)outerCircle.getCenterX(),(int)outerCircle.getCenterY(),1,1);
+        }
+        if(innerCircle!=null)
+        {
+            g2d.draw(innerCircle);
+            g2d.fillRect((int)innerCircle.getCenterX(),(int)innerCircle.getCenterY(),1,1);
+            if(innerCircle.getPoint()!=null)
+            {
+                g2d.setColor(colors.getColor());
+                g2d.fillOval((int)(innerCircle.getPointX()-2),(int)(innerCircle.getPointY()-2),5,5);
+                g2d.setColor(Color.BLACK);
+                g2d.drawOval((int)(innerCircle.getPointX()-2),(int)(innerCircle.getPointY()-2),5,5);
+            }
+        }
+        if(curve!=null)
+        {
+            g2d.setColor(colors.getColor());
+            g2d.draw(curve);
+        }
+    }
 }
