@@ -8,6 +8,10 @@ import java.awt.event.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
 import java.util.ArrayList;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.lang.Exception;
 
 
 
@@ -23,7 +27,7 @@ public class Main
     public Path2D.Double curve;
     public JPanel center,draw,init;
     public JColorChooser colors;
-    public BufferedImage screenshot;
+    public int x;
     
     private ArrayList<Path2D.Double> spirals;
     private ArrayList<Color> spiralColors;
@@ -57,7 +61,7 @@ public class Main
                 paintSpirograph(g);
             }
         };
-
+        x=0;
         init=new JPanel(new GridLayout(2,1));
         JPanel initBot=new JPanel(new GridLayout(1,2));
         JPanel initLeft=new JPanel(new GridLayout(4,1));
@@ -193,7 +197,14 @@ public class Main
         {
             public void actionPerformed(ActionEvent e)
             {
-                
+                try{
+                BufferedImage screenshot = new BufferedImage(mainDrawSize.width,mainDrawSize.height,BufferedImage.TYPE_INT_RGB);
+                paintSpirograph(screenshot.getGraphics());
+                x++;
+                ImageIO.write(screenshot,"PNG",new File("screenshot_"+x+".png"));
+                }catch(Exception E){
+                    E.printStackTrace();
+                }
             }
         });
         innerCircle.setPoint((int)(252.0+((pointPicker.getValue()/100.0)*innerCircle.getRadius())),innerCircle.getCenterY());
@@ -274,13 +285,13 @@ public class Main
         System.out.println("HELLO WORLD");
         Main m=new Main();
     }
-
+/*
     public boolean save(String name);
     {
         Graphics current_layer
         ImageIo.write(current_layer,"PNG",new File(name+".png"));
     }
-
+*/
     public void paintSpirograph(Graphics g)
     {
         Graphics2D g2d=(Graphics2D)g;
