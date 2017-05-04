@@ -39,12 +39,12 @@ public class Circle extends Ellipse2D.Double
 
     public void setX(double x)
     {
-        setPos(x,getY());
+        setPos(x,getCenterY());
     }
 
     public void setY(double y)
     {
-        setPos(getX(),y);
+        setPos(getCenterX(),y);
     }
 
     public void setPos(double x,double y)
@@ -64,12 +64,20 @@ public class Circle extends Ellipse2D.Double
 
     public void setAngle(double angle)
     {
+        double diff=angle-this.angle;
         this.angle=angle;
+        double x1=getPointX()-getCenterX();
+        double y1=getPointY()-getCenterY();
+
+        double x2=x1*Math.cos(diff)-y1*Math.sin(diff);
+        double y2=x1*Math.sin(diff)+y1*Math.cos(diff);
+
+        setPoint(x2+getCenterX(),y2+getCenterY());
     }
 
     public void changeAngle(double angle)
     {
-      this.angle+=angle;
+        setAngle(this.angle+angle);
     }
 
     public void setPoint(Point2D.Double p)
@@ -99,6 +107,7 @@ public class Circle extends Ellipse2D.Double
 
     private void move(double x,double y,double radius)
     {
+        setPoint(getPointX()-getCenterX()+x,getPointY()-getCenterY()+y);
         super.setFrame(x,y,radius*2f,radius*2f);
     }
 }

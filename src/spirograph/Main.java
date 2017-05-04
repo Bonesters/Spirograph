@@ -42,6 +42,7 @@ public class Main
         f=new JFrame("Spirograph");
         JPanel p=new JPanel();
         center=new JPanel();
+        JColorChooser colors=new JColorChooser(Color.BLACK);
         draw=new JPanel()
         {
             public void paint(Graphics g)
@@ -61,9 +62,17 @@ public class Main
                 {
                     g2d.draw(innerCircle);
                     g2d.fillRect((int)innerCircle.getCenterX(),(int)innerCircle.getCenterY(),1,1);
+                    if(innerCircle.getPoint()!=null)
+                    {
+                        g2d.setColor(colors.getColor());
+                        g2d.fillOval((int)(innerCircle.getPointX()-2),(int)(innerCircle.getPointY()-2),5,5);
+                        g2d.setColor(Color.BLACK);
+                        g2d.drawOval((int)(innerCircle.getPointX()-2),(int)(innerCircle.getPointY()-2),5,5);
+                    }
                 }
                 if(curve!=null)
                 {
+                    g2d.setColor(colors.getColor());
                     g2d.draw(curve);
                 }
             }
@@ -71,7 +80,6 @@ public class Main
 
         init=new JPanel(new GridLayout(2,1));
         JPanel initBot=new JPanel(new GridLayout(1,2));
-        JColorChooser colors=new JColorChooser(Color.BLACK);
         JPanel initLeft=new JPanel(new GridLayout(4,1));
         JTextArea rText=new JTextArea("Radius of Circle");
         JSlider sizePicker=new JSlider(25,200,50);
@@ -91,7 +99,6 @@ public class Main
                     g2d.drawOval((int)(initOther.width/2-innerCircle.getRadius()),(int)(initOther.height/2-innerCircle.getRadius()),(int)innerCircle.getWidth(),(int)innerCircle.getHeight());
                     if(innerCircle.getPoint()!=null)
                     {
-                        //System.out.println();
                         g2d.setColor(colors.getColor());
                         g2d.fillRect((int)(initOther.width/2+innerCircle.getPointX()-innerCircle.getCenterX())-1,(int)(initOther.height/2)-1,3,3);
                     }
@@ -116,7 +123,6 @@ public class Main
             public void stateChanged(ChangeEvent e)
             {
                 innerCircle.setRadius(sizePicker.getValue());
-                System.out.println(innerCircle.getPoint().toString());
                 innerCircle.setY(innerCircle.getRadius());
                 innerCircle.setPoint((int)(252.0+((pointPicker.getValue()/100.0)*innerCircle.getRadius())),innerCircle.getCenterY());
                 initRight.repaint();
@@ -162,6 +168,7 @@ public class Main
                 }
             }
         });
+        innerCircle.setPoint((int)(252.0+((pointPicker.getValue()/100.0)*innerCircle.getRadius())),innerCircle.getCenterY());
         forceSize(f,mainSize);
         forceSize(p,mainSize);
         forceSize(center,mainDrawSize);
@@ -206,12 +213,13 @@ public class Main
             public void actionPerformed(ActionEvent e)
             {
                 outerCircle.changeAngle(0.01);
-                innerCircle.changeAngle(0.01);
-                innerCircle.setPos((outerCircle.getRadius()-innerCircle.getRadius())*Math.cos(outerCircle.getAngle())+outerCircle.getCenterX(),
-                (outerCircle.getRadius()-innerCircle.getRadius())*Math.sin(outerCircle.getAngle())+outerCircle.getCenterY());
+                innerCircle.setX((outerCircle.getRadius()-innerCircle.getRadius())*-Math.sin(outerCircle.getAngle())+outerCircle.getCenterX());
+                innerCircle.setY((outerCircle.getRadius()-innerCircle.getRadius())*-Math.cos(outerCircle.getAngle())+outerCircle.getCenterY());
+                innerCircle.changeAngle(0.01*(outerCircle.getRadius()/innerCircle.getRadius()));
                 if(innerCircle.getPoint()!=null)
                 {
-                    Point2D m = getLocation();
+                    //Point2D m = getLocation();
+                    Point2D m=innerCircle.getPoint();
                     curve.lineTo(m.getX(),m.getY());
                 }
                 initRight.repaint();
